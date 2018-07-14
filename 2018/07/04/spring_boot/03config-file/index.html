@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="application.properties：绑定属性值到字段，绑定属性值到类；自定义properties配置文件；多环境配置。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/07/04/spring_boot/03config-file/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 3.【读】配置文件解读 - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          3.【读】配置文件解读
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-07-04
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/SpringBoot/">SpringBoot</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/07/04/spring_boot/03config-file/"
+             data-title="3.【读】配置文件解读">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-application-properties，绑定属性值到字段"><span class="toc-text">1） application.properties，绑定属性值到字段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1）基本使用"><span class="toc-text">1.1）基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2）文件结构"><span class="toc-text">1.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3）读取属性值中文乱码"><span class="toc-text">1.3）读取属性值中文乱码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-application-properties，绑定属性值到类"><span class="toc-text">2） application.properties，绑定属性值到类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1）基本使用"><span class="toc-text">2.1）基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2）文件结构"><span class="toc-text">2.2）文件结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3）-application-properties中属性组合"><span class="toc-text">3） application.properties中属性组合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4）-自定义properties配置文件"><span class="toc-text">4） 自定义properties配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1）基本使用"><span class="toc-text">4.1）基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2）文件结构"><span class="toc-text">4.2）文件结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5）-随机值配置"><span class="toc-text">5） 随机值配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6）-多环境配置"><span class="toc-text">6） 多环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过外部命令行对application-properties进行属性配置"><span class="toc-text">通过外部命令行对application.properties进行属性配置</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-application-properties，绑定属性值到字段"><a href="#1）-application-properties，绑定属性值到字段" class="headerlink" title="1） application.properties，绑定属性值到字段"></a>1） application.properties，绑定属性值到字段</h1><h2 id="1-1）基本使用"><a href="#1-1）基本使用" class="headerlink" title="1.1）基本使用"></a>1.1）基本使用</h2><p>我们可以把一些属性配置在application.properties文件中，然后在类的字段上通过注解@Value(value=”${config.name}”)，这样就会自动读取该配置文件中的属性值赋值给字段。一般用于配置数据库连接池属性、程序端口、邮箱账号等。</p>
+<h2 id="1-2）文件结构"><a href="#1-2）文件结构" class="headerlink" title="1.2）文件结构"></a>1.2）文件结构</h2><ul>
+<li><p>src/main</p>
+<ul>
+<li><p>java/com.hexo</p>
+<ul>
+<li>QuickdemoApplication<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class QuickdemoApplication &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;com.springboot.name&#125;&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">    @Value(&quot;$&#123;com.springboot.wish&#125;&quot;)</span><br><span class="line">    private String wish;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    public String hexo()&#123;</span><br><span class="line">        return name + wish;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(QuickdemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>resources/application.properties</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.springboot.name = 创造者</span><br><span class="line">com.springboot.wish = 正在创造不断进化的全新杰作</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>访问<code>http://localhost:8080/</code>，浏览器输出 “创造者正在创造不断进化的全新杰作”</p>
+<h2 id="1-3）读取属性值中文乱码"><a href="#1-3）读取属性值中文乱码" class="headerlink" title="1.3）读取属性值中文乱码"></a>1.3）读取属性值中文乱码</h2><p>当application.properties文件中配置的属性值包含中文时，在其他地方读取输出结果会是乱码。解决方案分两步：</p>
+<ul>
+<li><p>1 修改文件编码</p>
+<p>  依次点击<code>File</code> -&gt; <code>Settings</code> -&gt; <code>Editor</code> -&gt; <code>File Encodings</code>，将<code>Default encoding for properties files</code>设置为<code>UTF-8</code>并勾选<code>Transparent native-to-ascii conversion</code>。<br>  <img src="https://upload-images.jianshu.io/upload_images/3321751-08908f3cf5387a0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>2 重新修改application.properties属性值</p>
+<p>  修改完编码后，application.properties中的中文内容会变成乱码，我们改回中文就可以了。</p>
+</li>
+</ul>
+<h1 id="2）-application-properties，绑定属性值到类"><a href="#2）-application-properties，绑定属性值到类" class="headerlink" title="2） application.properties，绑定属性值到类"></a>2） application.properties，绑定属性值到类</h1><h2 id="2-1）基本使用"><a href="#2-1）基本使用" class="headerlink" title="2.1）基本使用"></a>2.1）基本使用</h2><p>有时候属性值太多了，一个个绑定到字段上太累。官方提倡绑定一个类，这里我们建一个ConfigBean类，类上面添加注解<code>@ConfigurationProperties(prefix = &quot;com.springboot&quot;)</code>。这样application.properties中以com.springboot打头的name属性值和wish属性值会自动绑定到这个类上面。<br>配置完还需要在SpringBoot入口类加上@EnableConfigurationProperties并指明要加载哪个bean，如果不写ConfigBean.class，在bean类那边添加。</p>
+<h2 id="2-2）文件结构"><a href="#2-2）文件结构" class="headerlink" title="2.2）文件结构"></a>2.2）文件结构</h2><ul>
+<li><p>src/main</p>
+<ul>
+<li><p>java/com.hexo</p>
+<ul>
+<li><p>bean</p>
+<ul>
+<li>ConfigBean<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@ConfigurationProperties(prefix = &quot;com.springboot&quot;)</span><br><span class="line">public class ConfigBean &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private String wish;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getWish() &#123;</span><br><span class="line">        return wish;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setWish(String want) &#123;</span><br><span class="line">        this.wish = want;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>QuickdemoApplication</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableConfigurationProperties(&#123;ConfigBean.class&#125;)</span><br><span class="line">public class QuickdemoApplication &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    ConfigBean configBean;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    public String hexo()&#123;</span><br><span class="line">        return configBean.getName()+configBean.getWish();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(QuickdemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>resources/application.properties</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.springboot.name = 创造者</span><br><span class="line">com.springboot.wish = 正在创造不断进化的全新杰作</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p> IDE会有错误提示，实际上并没问题，不用理会。表现为：<br>1、ConfigBean类上方会提示Spring Boot Configuraation Annoation Processor not found in classpath。<br>2、QuickdemoApplication类中ConfigBean configBean;会提示Could not autowired。No beans of ‘ConfigBean’ type found。</p>
+</blockquote>
+<h1 id="3）-application-properties中属性组合"><a href="#3）-application-properties中属性组合" class="headerlink" title="3） application.properties中属性组合"></a>3） application.properties中属性组合</h1><p>在application.properties中的各个属性值可以组合起来，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">com.springboot.name = 创造者</span><br><span class="line">com.springboot.wish = 正在创造不断进化的全新杰作</span><br><span class="line">com.springboot.creating = $&#123;com.springboot.name&#125;$&#123;com.springboot.wish&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="4）-自定义properties配置文件"><a href="#4）-自定义properties配置文件" class="headerlink" title="4） 自定义properties配置文件"></a>4） 自定义properties配置文件</h1><h2 id="4-1）基本使用"><a href="#4-1）基本使用" class="headerlink" title="4.1）基本使用"></a>4.1）基本使用</h2><p>有时候我们不希望把所有配置都放在application.properties里面，这时候我们自己在resources目录下创建后缀为.properties的文件并创建类与该配置文件绑定，这里创建test.properties。<br>在绑定类中需要添加@PropertySource(“classpath:test.properties”)去指定读取创建的配置文件，还要在上面添加@Configuration注解。</p>
+<h2 id="4-2）文件结构"><a href="#4-2）文件结构" class="headerlink" title="4.2）文件结构"></a>4.2）文件结构</h2><ul>
+<li><p>src/main</p>
+<ul>
+<li><p>java/com.hexo</p>
+<ul>
+<li><p>bean</p>
+<ul>
+<li>ConfigBean<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConfigurationProperties(prefix = &quot;com.springboot&quot;)</span><br><span class="line">@PropertySource(&quot;classpath:test.properties&quot;)</span><br><span class="line">public class ConfigBean &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private String wish;</span><br><span class="line">    private String creating;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getWish() &#123;</span><br><span class="line">        return wish;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setWish(String want) &#123;</span><br><span class="line">        this.wish = want;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getCreating() &#123;</span><br><span class="line">        return creating;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setCreating(String creating) &#123;</span><br><span class="line">        this.creating = creating;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>QuickdemoApplication</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableConfigurationProperties(&#123;ConfigBean.class&#125;)</span><br><span class="line">public class QuickdemoApplication &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    ConfigBean configBean;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    public String hexo()&#123;</span><br><span class="line">        return configBean.getName()+configBean.getWish();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(QuickdemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>resources</p>
+<ul>
+<li><p>application.properties</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>test.properties</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">com.springboot.name = 创造者</span><br><span class="line">com.springboot.wish = 正在创造不断进化的全新杰作</span><br><span class="line">com.springboot.creating = $&#123;com.springboot.name&#125;$&#123;com.springboot.wish&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>访问<code>http://localhost:8080/</code>，浏览器输出 “创造者正在创造不断进化的全新杰作”</p>
+<h1 id="5）-随机值配置"><a href="#5）-随机值配置" class="headerlink" title="5） 随机值配置"></a>5） 随机值配置</h1><p>配置文件中${random} 可以用来生成各种不同类型的随机值，从而简化了代码生成的麻烦，例如 生成 int 值、long 值或者 string 字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dudu.secret=$&#123;random.value&#125;</span><br><span class="line">dudu.number=$&#123;random.int&#125;</span><br><span class="line">dudu.bignumber=$&#123;random.long&#125;</span><br><span class="line">dudu.uuid=$&#123;random.uuid&#125;</span><br><span class="line">dudu.number.less.than.ten=$&#123;random.int(10)&#125;</span><br><span class="line">dudu.number.in.range=$&#123;random.int[1024,65536]&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="6）-多环境配置"><a href="#6）-多环境配置" class="headerlink" title="6） 多环境配置"></a>6） 多环境配置</h1><p>当应用程序需要部署到不同运行环境时，一些配置细节通常会有所不同。最简单的比如日志，生产日志会将日志级别设置为WARN或更高级别，并将日志写入日志文件；而开发环境下日志级别会设置为DEBUG，日志输出到控制台即可。</p>
+<p>如果按照以前的做法，就是每次发布的时候替换掉配置文件，这样太麻烦了。Spring提供多环境配置的支持，我们可以为每个环境编写配置文件，然后在<code>application.properties</code>或命令行中指定要使用哪个环境的配置文件。</p>
+<p>在SpringBoot中多环境配置文件名需要满足<code>application-{profile}.properties</code>的格式，其中<code>{profile}</code>对应你的环境标识，比如：</p>
+<ul>
+<li>application-dev.properties：开发环境</li>
+<li>application-prod.properties：生产环境</li>
+</ul>
+<p>在开发环境下，我们只需要在application.properties中配置spring.profiles.active属性值为dev，程序就会使用对应开发环境。切换到生产环境时，只需要修改application.properties中spring.profiles.active属性值为prod即可。</p>
+<p>除了可以在application.properties文件中指定去读哪个环境的配置文件，也可以用命令行启动的时候带上参数进行指定：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xxx.jar --spring.profiles.active=dev</span><br></pre></td></tr></table></figure></p>
+<h2 id="通过外部命令行对application-properties进行属性配置"><a href="#通过外部命令行对application-properties进行属性配置" class="headerlink" title="通过外部命令行对application.properties进行属性配置"></a>通过外部命令行对application.properties进行属性配置</h2><p>SpringBoot是基于jar包运行的，打成jar包的程序可以直接通过下面命令运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xx.jar</span><br></pre></td></tr></table></figure></p>
+<p>可以通过下面命令修改tomcat端口号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xx.jar --server.port=9090</span><br></pre></td></tr></table></figure></p>
+<p><code>java -jar xx.jar --server.port=9090</code>等价于在<code>application.properties</code>中添加属性<code>server.port=9090</code>。<br>可以看出，外部命令行中连续的两个减号<code>--</code>就是对<code>application.properties</code>中的属性值进行赋值的标识。</p>
+<blockquote>
+<p>原文作者 ：嘟嘟MD<br>原文链接 ： <a href="http://tengj.top/2017/02/28/springboot2/" target="_blank" rel="noopener">http://tengj.top/2017/02/28/springboot2/</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/07/04/spring_boot/04start-up-theory/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">4.【读】开发Web应用之Thymeleaf篇</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/07/03/annotation/04normal-annotation-part1/">
+        <span class="next-text nav-default">4.【读】@SpringBootApplication；@RestController；@Controller；@ResponseBody----终章</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

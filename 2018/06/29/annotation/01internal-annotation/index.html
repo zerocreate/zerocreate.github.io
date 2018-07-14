@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="内置注解；@Deprecated；@Override；@SuppressWarnings。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/06/29/annotation/01internal-annotation/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 1.【读】Java内置注解及使用 - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          1.【读】Java内置注解及使用
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/Java注解/">Java注解</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/06/29/annotation/01internal-annotation/"
+             data-title="1.【读】Java内置注解及使用">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-注解简单介绍"><span class="toc-text">1） 注解简单介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-Java最常用的三种注解"><span class="toc-text">2） Java最常用的三种注解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1）-Deprecated简单案例"><span class="toc-text">2.1） @Deprecated简单案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-2）-Override简单案例"><span class="toc-text">2.2） @Override简单案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-3）-SuppressWarning简单案例"><span class="toc-text">2.3） @SuppressWarning简单案例</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-注解简单介绍"><a href="#1）-注解简单介绍" class="headerlink" title="1） 注解简单介绍"></a>1） 注解简单介绍</h1><p>我们在进行Java开发时肯定会用到大量的注解，也就是用@打头的内容，我们可以通过修改注解来改变程序的运行逻辑。<br>注解是JDK5之后引入的特性，它可以被当做一种特殊的注释。因为注释之所以说它比较特殊，是因为它并不只是给我们看的，它还能在编译器和运行期发生作用，影响程序的执行。</p>
+<h1 id="2）-Java最常用的三种注解"><a href="#2）-Java最常用的三种注解" class="headerlink" title="2） Java最常用的三种注解"></a>2） Java最常用的三种注解</h1><ul>
+<li><p>1 @Deprecated</p>
+<p>  表示当前的元素已经不推荐使用。</p>
+</li>
+<li><p>2 @Override</p>
+<p>  表示当前方法是继承自父类或者实现的接口的方法。</p>
+</li>
+<li><p>3 @SuppressWarnings</p>
+<p>  表示忽略某些编译器的警告信息。</p>
+</li>
+</ul>
+<h1 id="2-1）-Deprecated简单案例"><a href="#2-1）-Deprecated简单案例" class="headerlink" title="2.1） @Deprecated简单案例"></a>2.1） @Deprecated简单案例</h1><p>我们在Java开发中有时会碰到一些方法还可以使用，但是会提示该方法已经过时，不建议继续使用。<br>比如java.util.Date类的getSeconds()方法就是一个过时的方法，我们在使用的时候会看到一个删除线，如下所示:<br><img src="https://upload-images.jianshu.io/upload_images/3321751-ba1c64f37c7a7d5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>@Deprecated作用是让我们也可以指定自己编写的哪些方法是不建议被使用的，如下使用该注解声明<code>ownOldMethod()</code>是不建议使用的方法，在main函数中进行调用时就会出现删除线，如下所示:<br><img src="https://upload-images.jianshu.io/upload_images/3321751-c0da5f82e6d2e453.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="2-2）-Override简单案例"><a href="#2-2）-Override简单案例" class="headerlink" title="2.2） @Override简单案例"></a>2.2） @Override简单案例</h1><p>当子类继承父类、子类实现接口的时候，我们给重载的方法加上@Override注解是一个好的编程习惯。下面案例如果没有添加@Override注解，就会认为子类拓展了一个新的方法，子类对象一共包含两个方法：从父类继承的run()和自己拓展fun()。而实际上我们是要让子类去覆盖父类的run()方法，只是在子类中将run拼写错误为fun。添加@Override注解有助于我们及时发现这类错误。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3321751-0879c47c1ae9080a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="2-3）-SuppressWarning简单案例"><a href="#2-3）-SuppressWarning简单案例" class="headerlink" title="2.3） @SuppressWarning简单案例"></a>2.3） @SuppressWarning简单案例</h1><p>对于@SuppressWarning注解，它通常用来屏蔽警告，比如我们实现了Serializable接口，但是却没有指定serialVersionUID的值的时候，它就会给我们报告一个警告信息。如下截图所示:<br><img src="https://upload-images.jianshu.io/upload_images/3321751-662939993e3ff05f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>因此我们可以在类的前面加上@SuppressWarnings(“serial”)来屏蔽这个警告:<br><img src="https://upload-images.jianshu.io/upload_images/3321751-315c378ebbabb2a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>不过本地只要设置好IDE环境，不用添加该注解也不会有警告信息。这里只是为了介绍该注解的使用。</p>
+<blockquote>
+<p>原文作者 ：梦之都<br>原文链接 ： <a href="https://www.mengzhidu.com/online/item/144/956" target="_blank" rel="noopener">https://www.mengzhidu.com/online/item/144/956</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/29/annotation/02selfdefined-annotation/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2.【读】自定义注解</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/06/28/spring4.x/14aop-annotation-aspectj/">
+        <span class="next-text nav-default">14.【读】AOP实现方式：AspectJ（注解方式）----终章</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

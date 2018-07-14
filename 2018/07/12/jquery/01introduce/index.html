@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="jQuery的作用；jQuery的版本系列。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/07/12/jquery/01introduce/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 1.【读】jQuery简介 - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          1.【读】jQuery简介
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-07-12
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/jQuery/">jQuery</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/07/12/jquery/01introduce/"
+             data-title="1.【读】jQuery简介">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-jQuery的作用"><span class="toc-text">1） jQuery的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-jQuery的版本系列"><span class="toc-text">2） jQuery的版本系列</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-jQuery的作用"><a href="#1）-jQuery的作用" class="headerlink" title="1） jQuery的作用"></a>1） jQuery的作用</h1><p>jQuery最主要的作用是方便的帮我们查询我们想要的DOM元素。除此之外，还提供了很多常用的功能。比如通过ajax来交互的方式、数据缓存和promise模式。</p>
+<p>jQuery确实是一个非常优秀的库，有着相当多的网站都在使用jQuery库。而且很多知名产品比如Bootstrap也默认是使用的jQuery。</p>
+<p>虽然说诸如React、AngularJS等框架的出现，可能我们基本不需要jQuery这样比较古老的类库了，但是在很多场景下使用jQuery依然是一个极佳的选择。</p>
+<h1 id="2）-jQuery的版本系列"><a href="#2）-jQuery的版本系列" class="headerlink" title="2） jQuery的版本系列"></a>2） jQuery的版本系列</h1><p>jQuery有三个系列，分别是1.x系列和2.x系列和3.x系列，其中2.x系列将不再对IE6、7 、8等提供支持，而3.x系列尚未投入大规模使用。国内还是有不少人继续使用jQuery1.x系列的类库，所以我们基于1.x系列来学习jQuery。</p>
+<blockquote>
+<p>原文作者 ：梦之都<br>原文链接 ： <a href="http://www.mengzhidu.com/online/item/60/399" target="_blank" rel="noopener">http://www.mengzhidu.com/online/item/60/399</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/07/12/jquery/02quick-demo/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2.【读】快速demo解读</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/07/04/spring_boot/04start-up-theory/">
+        <span class="next-text nav-default">4.【读】开发Web应用之Thymeleaf篇</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

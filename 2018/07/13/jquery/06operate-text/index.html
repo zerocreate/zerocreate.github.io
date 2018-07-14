@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="用多个demo讲解jquery对文本的操作。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/07/13/jquery/06operate-text/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 6.【读】操作文本 - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          6.【读】操作文本
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-07-13
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/jQuery/">jQuery</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/07/13/jquery/06operate-text/"
+             data-title="6.【读】操作文本">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-获取和修改文本的操作demo"><span class="toc-text">1） 获取和修改文本的操作demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1）基本用法"><span class="toc-text">1.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2）文件结构"><span class="toc-text">1.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3）运行效果"><span class="toc-text">1.3）运行效果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-在选中元素里面添加内容的操作demo"><span class="toc-text">2） 在选中元素里面添加内容的操作demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1）基本用法"><span class="toc-text">2.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2）文件结构"><span class="toc-text">2.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3）运行效果"><span class="toc-text">2.3）运行效果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3）-在选中元素里添加同级内容的操作demo"><span class="toc-text">3） 在选中元素里添加同级内容的操作demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1）基本用法"><span class="toc-text">3.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2）文件结构"><span class="toc-text">3.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3）运行效果"><span class="toc-text">3.3）运行效果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4）-包裹匹配的元素操作demo"><span class="toc-text">4） 包裹匹配的元素操作demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1）基本用法"><span class="toc-text">4.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2）文件结构"><span class="toc-text">4.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3）运行效果"><span class="toc-text">4.3）运行效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4）文件结构"><span class="toc-text">4.4）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5）运行效果"><span class="toc-text">4.5）运行效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6）文件结构"><span class="toc-text">4.6）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7）运行效果"><span class="toc-text">4.7）运行效果</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-获取和修改文本的操作demo"><a href="#1）-获取和修改文本的操作demo" class="headerlink" title="1） 获取和修改文本的操作demo"></a>1） 获取和修改文本的操作demo</h1><h2 id="1-1）基本用法"><a href="#1-1）基本用法" class="headerlink" title="1.1）基本用法"></a>1.1）基本用法</h2><p>对于文本处理的操作很重要，我们可以获取某个html标签的文本或者给对应的html标签中设置内容。</p>
+<ul>
+<li>1 用html()来获取对应的元素的html代码</li>
+<li>2 用html(xxx)来设置对应的元素的值为xxx</li>
+<li>3 用text()来获取对应的元素的文本内容</li>
+<li>4 用text(xxx)来设置对应的元素的值为xxx</li>
+<li>5 用val()来获取对应的元素的值，通常是各种input的值</li>
+<li>6 用val(xxx)来设置对应的input元素的值</li>
+</ul>
+<p>需要说明的是，html()方法会连同子标签的标签也一起得到，但是text()不会获取到子标签的标签对，但是会得到不带html标签的文本内容。<br>特别说明一下，val()方法通常用于表单，和其他两个方法不是一个次元。</p>
+<h2 id="1-2）文件结构"><a href="#1-2）文件结构" class="headerlink" title="1.2）文件结构"></a>1.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-1.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;p id=&quot;idx&quot;&gt;学，&lt;span&gt;然后知不足&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p id=&quot;idy&quot;&gt;学，然后求进步&lt;/p&gt;</span><br><span class="line">        &lt;p id=&quot;idz&quot;&gt;学，然后强自我&lt;/p&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                console.log($(&quot;#idx&quot;).html());</span><br><span class="line">                console.log($(&quot;#idx&quot;).text());</span><br><span class="line"></span><br><span class="line">                $(&quot;#idy&quot;).html(&quot;通过html修改&quot;);</span><br><span class="line">                $(&quot;#idz&quot;).text(&quot;通过text修改&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3）运行效果"><a href="#1-3）运行效果" class="headerlink" title="1.3）运行效果"></a>1.3）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-3804acbe13978115.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="2）-在选中元素里面添加内容的操作demo"><a href="#2）-在选中元素里面添加内容的操作demo" class="headerlink" title="2） 在选中元素里面添加内容的操作demo"></a>2） 在选中元素里面添加内容的操作demo</h1><h2 id="2-1）基本用法"><a href="#2-1）基本用法" class="headerlink" title="2.1）基本用法"></a>2.1）基本用法</h2><ul>
+<li>1 用append(xxx)来向选中的元素中添加内容xxx</li>
+<li>2 用appendTo(xxx)来把选中的元素添加到xxx后面</li>
+<li>3 用prepend(xxx)来向选中的元素的头部添加内容xxx</li>
+<li>4 用prependTo(xxx)来把选中的元素添加到xxx后面</li>
+</ul>
+<h2 id="2-2）文件结构"><a href="#2-2）文件结构" class="headerlink" title="2.2）文件结构"></a>2.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-2.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div id=&quot;idx&quot;&gt;正在Creating&lt;/div&gt;</span><br><span class="line">        &lt;div id=&quot;idy&quot;&gt;加快进度吧&lt;/div&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;#idx&quot;).css(&quot;color&quot;,&quot;red&quot;).append(&quot;&lt;a href=&apos;http://www.baidu.com&apos; &gt;百度&lt;/a&gt;&quot;);</span><br><span class="line">                $(&quot;#idy&quot;).css(&quot;color&quot;,&quot;red&quot;).prepend(&quot;&lt;a href=&apos;http://www.qq.cocm&apos;&gt;腾讯&lt;/a&gt;&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3）运行效果"><a href="#2-3）运行效果" class="headerlink" title="2.3）运行效果"></a>2.3）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-8f88d55930f27c27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>之所以百度链接颜色是红棕色是因为我们已经访问过该超链接，所以颜色才由蓝色变成红棕色。</p>
+<h1 id="3）-在选中元素里添加同级内容的操作demo"><a href="#3）-在选中元素里添加同级内容的操作demo" class="headerlink" title="3） 在选中元素里添加同级内容的操作demo"></a>3） 在选中元素里添加同级内容的操作demo</h1><h2 id="3-1）基本用法"><a href="#3-1）基本用法" class="headerlink" title="3.1）基本用法"></a>3.1）基本用法</h2><ul>
+<li>1 用after(xxx)来向选中的元素后面追加内容xxx</li>
+<li>2 用insertAfter(xxx)表示把选中的元素追加到内容xxx的后面</li>
+<li>3 用before(xxx)来向选中的元素前面添加内容xxx</li>
+<li>4 用insertBefore(xxx)表示把选中的元素追加到内容xxx的前面</li>
+</ul>
+<h2 id="3-2）文件结构"><a href="#3-2）文件结构" class="headerlink" title="3.2）文件结构"></a>3.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-3.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div id=&quot;idx&quot;&gt;正在Creating&lt;/div&gt;</span><br><span class="line">        &lt;div id=&quot;idy&quot;&gt;加快进度吧&lt;/div&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;#idx&quot;).css(&quot;color&quot;,&quot;red&quot;).after(&quot;&lt;a href=&apos;http://www.baidu.com&apos; &gt;百度&lt;/a&gt;&quot;);</span><br><span class="line">                $(&quot;#idy&quot;).css(&quot;color&quot;,&quot;red&quot;).before(&quot;&lt;a href=&apos;http://www.qq.com&apos; &gt;腾讯&lt;/a&gt;&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3）运行效果"><a href="#3-3）运行效果" class="headerlink" title="3.3）运行效果"></a>3.3）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-d6f57170328a972e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="4）-包裹匹配的元素操作demo"><a href="#4）-包裹匹配的元素操作demo" class="headerlink" title="4） 包裹匹配的元素操作demo"></a>4） 包裹匹配的元素操作demo</h1><p>有时候我们需要将匹配的元素包裹起来，可以使用jQuery提供的一系列包裹方法。</p>
+<h2 id="4-1）基本用法"><a href="#4-1）基本用法" class="headerlink" title="4.1）基本用法"></a>4.1）基本用法</h2><ul>
+<li>1 用wrap(xxx)来让被选择的每个元素分别被xxx包裹起来。</li>
+<li>2 用wrapAll(xxx)来让被选择的所有元素被一个xxx包裹起来</li>
+<li>3 用wrapInner(xxx)：把每个元素的内容嵌入另一个标签，然后再把该标签包裹进该元素内部</li>
+</ul>
+<h2 id="4-2）文件结构"><a href="#4-2）文件结构" class="headerlink" title="4.2）文件结构"></a>4.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-4.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;span&gt;Creater&lt;/span&gt;&lt;span&gt;Zeroer&lt;/span&gt;&lt;span&gt;Other&lt;/span&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;span&quot;).wrap(&quot;&lt;div&gt;&lt;/div&gt;&quot;);</span><br><span class="line">                $(&quot;div&quot;).css(&quot;color&quot;,&quot;red&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-3）运行效果"><a href="#4-3）运行效果" class="headerlink" title="4.3）运行效果"></a>4.3）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-d86a07bef84ab10c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="4-4）文件结构"><a href="#4-4）文件结构" class="headerlink" title="4.4）文件结构"></a>4.4）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-5.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;span&gt;Creater&lt;/span&gt;&lt;span&gt;Zeroer&lt;/span&gt;&lt;span&gt;Other&lt;/span&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;span&quot;).wrapAll(&quot;&lt;div&gt;&lt;/div&gt;&quot;);</span><br><span class="line">                $(&quot;div&quot;).css(&quot;color&quot;,&quot;red&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-5）运行效果"><a href="#4-5）运行效果" class="headerlink" title="4.5）运行效果"></a>4.5）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-766a0f5abcbbf7d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="4-6）文件结构"><a href="#4-6）文件结构" class="headerlink" title="4.6）文件结构"></a>4.6）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-6.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;span&gt;Creater&lt;/span&gt;&lt;span&gt;Zeroer&lt;/span&gt;&lt;span&gt;Other&lt;/span&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;span&quot;).wrapInner(&quot;&lt;a href=&apos;http://www.baidu.com&apos; &gt; &lt;/a&gt;&quot;);</span><br><span class="line">                $(&quot;a&quot;).css(&quot;color&quot;,&quot;red&quot;).css(&quot;display&quot;,&quot;block&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-7）运行效果"><a href="#4-7）运行效果" class="headerlink" title="4.7）运行效果"></a>4.7）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-b2413a520d976b6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>原文作者 ：梦之都<br>原文链接 ： <a href="https://www.mengzhidu.com/online/item/60/404" target="_blank" rel="noopener">https://www.mengzhidu.com/online/item/60/404</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/07/13/jquery/07event/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">7.【读】事件处理</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/07/12/jquery/05operate-css/">
+        <span class="next-text nav-default">5.【读】操作样式</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

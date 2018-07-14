@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="耦合(依赖)；IOC控制反转(DI依赖注入)。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/06/06/spring4.x/02IOC(DI)/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 2.【读】IOC控制反转(DI依赖注入) - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          2.【读】IOC控制反转(DI依赖注入)
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-06
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/Spring4-x/">Spring4.x</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/06/06/spring4.x/02IOC(DI)/"
+             data-title="2.【读】IOC控制反转(DI依赖注入)">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-耦合-依赖"><span class="toc-text">1） 耦合(依赖)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1）应用IOC-DI-前"><span class="toc-text">1.1）应用IOC(DI)前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2）耦合-依赖-概念的理解"><span class="toc-text">1.2）耦合(依赖)概念的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3）应用IOC-DI-前的耦合度-依赖性"><span class="toc-text">1.3）应用IOC(DI)前的耦合度(依赖性)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-IOC-DI"><span class="toc-text">2） IOC(DI)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1）应用IOC-DI-后"><span class="toc-text">2.1）应用IOC(DI)后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2）控制反转"><span class="toc-text">2.2）控制反转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3）控制反转也叫依赖注入（IOC也就是DI）"><span class="toc-text">2.3）控制反转也叫依赖注入（IOC也就是DI）</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-耦合-依赖"><a href="#1）-耦合-依赖" class="headerlink" title="1） 耦合(依赖)"></a>1） 耦合(依赖)</h1><h2 id="1-1）应用IOC-DI-前"><a href="#1-1）应用IOC-DI-前" class="headerlink" title="1.1）应用IOC(DI)前"></a>1.1）应用IOC(DI)前</h2><p>软件系统的运行是许多对象共同协作完成的事情。<br>如果我们打开机械式手表的后盖，可以看到多个齿轮；这些齿轮相互啮合在一起，共同完成手表的走时。<br>在手表这个系统中，每一个齿轮就是一个对象；齿轮之间的啮合关系，就是软件系统中对象之间的耦合关系（依赖关系）。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3321198-2c457b23bb6b50f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图1"></p>
+<h2 id="1-2）耦合-依赖-概念的理解"><a href="#1-2）耦合-依赖-概念的理解" class="headerlink" title="1.2）耦合(依赖)概念的理解"></a>1.2）耦合(依赖)概念的理解</h2><p>依赖就是：我要完成一件事需要你的参与，因此我是依赖你的。在这件事中你参与的比重越大，依赖性就越大，也就是耦合度越高。耦合就是依赖。<br>司机要开车就需要有车才行，因此Driver类依赖于Car类，下面Driver的三个方法分别演示了依赖关系的三种不同形式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Car &#123;   </span><br><span class="line">    public static void run()&#123;   </span><br><span class="line">        System.out.println(&quot;汽车在奔跑&quot;);   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;   </span><br><span class="line">     </span><br><span class="line">class Driver</span><br><span class="line"> &#123;   </span><br><span class="line">    //使用形参方式发生依赖关系   </span><br><span class="line">    public void drive1(Car car)&#123;   </span><br><span class="line">        car.run();   </span><br><span class="line">    &#125;   </span><br><span class="line">    //使用局部变量发生依赖关系   </span><br><span class="line">    public void drive2()&#123;   </span><br><span class="line">        Car car = new Car();   </span><br><span class="line">        car.run();   </span><br><span class="line">    &#125;   </span><br><span class="line">    //使用静态变量发生依赖关系   </span><br><span class="line">    public void drive3()&#123;   </span><br><span class="line">        Car.run();   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于Driver类依赖于Car，如果Car坏了，那么Driver也没法开车了。耦合(依赖)不仅可以存在于对象之间，也可以是模块与模块之间，我们应该尽可能地降低耦合度，防止一个环节出错影响整个软件系统。</p>
+<h2 id="1-3）应用IOC-DI-前的耦合度-依赖性"><a href="#1-3）应用IOC-DI-前的耦合度-依赖性" class="headerlink" title="1.3）应用IOC(DI)前的耦合度(依赖性)"></a>1.3）应用IOC(DI)前的耦合度(依赖性)</h2><p>在上面的齿轮组中，齿轮之间耦合度过高；如果有一个齿轮出了问题，可能会导致到整个齿轮组无法正常运转。在软件系统中则是对象直接互相依赖，比如A对象和B对象，A对象在里面需要使用到B对象的属性和方法，那么就需要在A对象里面创建B对象的实例并去调用它；也就说负责开发A对象的人需要等B对象开发完了才能进行开发工作。</p>
+<h1 id="2）-IOC-DI"><a href="#2）-IOC-DI" class="headerlink" title="2） IOC(DI)"></a>2） IOC(DI)</h1><h2 id="2-1）应用IOC-DI-后"><a href="#2-1）应用IOC-DI-后" class="headerlink" title="2.1）应用IOC(DI)后"></a>2.1）应用IOC(DI)后</h2><p>IoC容器就是管理依赖关系的第三方容器。<br>我们引入IoC之后，IoC容器起到了一种类似“粘合剂”的作用，把系统中的所有对象粘合在一起发挥作用：<br><img src="http://upload-images.jianshu.io/upload_images/3321198-2e97bfe3c72089b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图2"></p>
+<h2 id="2-2）控制反转"><a href="#2-2）控制反转" class="headerlink" title="2.2）控制反转"></a>2.2）控制反转</h2><p>“控制反转”这个名称的由来。</p>
+<ul>
+<li><p>1 在没有引入IOC容器之前，对象A依赖于对象B，那么对象A在初始化或者运行到某一点的时候，自己必须主动去创建对象B或者使用已经创建的对象B。无论是创建还是使用对象B，控制权都在自己手上。</p>
+</li>
+<li><p>2 在引入IOC容器之后，这种情形就完全改变了。由于IOC容器的加入，对象A与对象B之间失去了直接联系，所以，当对象A运行到需要对象B的时候，IOC容器会主动创建一个对象B注入到对象A需要的地方。</p>
+<p>  通过前后的对比，我们不难看出来：对象A获得依赖对象B的过程，由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”这个名称的由来。</p>
+</li>
+</ul>
+<p>控制反转有三个优点。</p>
+<ul>
+<li><p>1 优点1<br>  从主动变成被动好像吃亏了，其实不是；就好比你要在3点钟出门，是自己盯着时间表主动掌握时间点好呢，还是由闹铃来告诉你到点好呢。</p>
+</li>
+<li><p>2 优点2</p>
+<p>  实现对象之间的解耦。由于A对象在使用到B对象时，不必在A对象里面去使用B对象，而是IOC容器会自动帮我们注入，所以我们不必等B对象开发完再去使用。因此可以同时进行A、B、C、D四个对象的开发工作，也防止牵一发而动全身。</p>
+</li>
+<li><p>3 优点3</p>
+<p>  防止牵一发而动全身。</p>
+</li>
+</ul>
+<h2 id="2-3）控制反转也叫依赖注入（IOC也就是DI）"><a href="#2-3）控制反转也叫依赖注入（IOC也就是DI）" class="headerlink" title="2.3）控制反转也叫依赖注入（IOC也就是DI）"></a>2.3）控制反转也叫依赖注入（IOC也就是DI）</h2><p>所谓依赖注入，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。<br>依赖注入(DI)和控制反转(IOC)是同一件事情的不同说法；因为控制反转的本质是主动获取依赖对象反转为被动获取依赖对象，而实现被动获取的方式就是依赖注入。</p>
+<blockquote>
+<p>原文作者 ：DebugLZQ<br>原文链接 ： <a href="http://www.cnblogs.com/DebugLZQ/archive/2013/06/05/3107957.html" target="_blank" rel="noopener">http://www.cnblogs.com/DebugLZQ/archive/2013/06/05/3107957.html</a><br>原文作者 ：专注it<br>原文链接 ： <a href="https://www.cnblogs.com/wanghuaijun/p/5421419.html" target="_blank" rel="noopener">https://www.cnblogs.com/wanghuaijun/p/5421419.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/06/spring4.x/03AOP/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">3.【读】AOP(面向切面编程)</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/06/06/spring4.x/01introduce/">
+        <span class="next-text nav-default">1.【读】Spring简介</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="自定义注解；元注解。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/06/29/annotation/02selfdefined-annotation/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 2.【读】自定义注解 - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          2.【读】自定义注解
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-29
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/Java注解/">Java注解</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/06/29/annotation/02selfdefined-annotation/"
+             data-title="2.【读】自定义注解">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-自定义注解"><span class="toc-text">1） 自定义注解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-主要的四种元注解"><span class="toc-text">2） 主要的四种元注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1）-Target"><span class="toc-text">2.1）@Target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2）-Retention"><span class="toc-text">2.2）@Retention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3）-Documented"><span class="toc-text">2.3）@Documented</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4）-Inherited"><span class="toc-text">2.4）@Inherited</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3）-简单案例"><span class="toc-text">3） 简单案例</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-自定义注解"><a href="#1）-自定义注解" class="headerlink" title="1） 自定义注解"></a>1） 自定义注解</h1><p>除了Java内置的注解，我们还可以自定义注解。<br>定义注解的一般格式为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@元注解</span><br><span class="line">@interface  注解名&#123;</span><br><span class="line">    数据类型1   成员名1() [default  默认值1];</span><br><span class="line">    数据类型2   成员名2() [default  默认值2];</span><br><span class="line">    ...</span><br><span class="line">    数据类型n   成员名n() [default  默认值n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过使用<code>@interface</code>来说明它是一个注解，在它上面还需要添加元注解。普通注解是对类、方法、属性等等进行注解，而元注解是对注解进行注解。</p>
+<h1 id="2）-主要的四种元注解"><a href="#2）-主要的四种元注解" class="headerlink" title="2） 主要的四种元注解"></a>2） 主要的四种元注解</h1><h2 id="2-1）-Target"><a href="#2-1）-Target" class="headerlink" title="2.1）@Target"></a>2.1）@Target</h2><p>用于限制注解所修饰的类型。比如@Target(ElementType.METHOD)则限制了这个注解只能用于修饰方法。</p>
+<ul>
+<li>1 @Target(ElementType.METHOD) //方法</li>
+<li>2 @Target(ElementType.TYPE)   //接口、类、枚举、注解</li>
+<li>3 @Target(ElementType.FIELD) //字段、枚举的常量</li>
+<li>4 @Target(ElementType.PARAMETER) //方法参数</li>
+<li>5 @Target(ElementType.CONSTRUCTOR)  //构造函数</li>
+<li>6 @Target(ElementType.LOCAL_VARIABLE)//局部变量</li>
+<li>7 @Target(ElementType.ANNOTATION_TYPE)//注解</li>
+<li>8 @Target(ElementType.PACKAGE) ///包   </li>
+</ul>
+<h2 id="2-2）-Retention"><a href="#2-2）-Retention" class="headerlink" title="2.2）@Retention"></a>2.2）@Retention</h2><p>用于限制注解生效的时间。</p>
+<ul>
+<li><p>1 @Retention(RetentionPolicy.SOURECE)</p>
+<p>  表示在源代码级别生效，它只能与编译器交互。比如@Override就是这个级别的注解。</p>
+</li>
+<li><p>2 @Retention(RetentionPolicy.CLASS)</p>
+<p>  表示字节码级别，注解存在于源代码与字节码文件中。它需要添加JVM加载时的代理，从而做到能够动态修改字节码文件。</p>
+</li>
+<li><p>3 @Retention(RetentionPolicy.RUNTIME)</p>
+<p>  表示运行时级别，注解存在于源代码、字节码与JVM虚拟机中。它在运行时起作用，因此它的改变会改变程序的执行逻辑。</p>
+</li>
+</ul>
+<h2 id="2-3）-Documented"><a href="#2-3）-Documented" class="headerlink" title="2.3）@Documented"></a>2.3）@Documented</h2><p>用于表示让该注解自动加入Javadoc。</p>
+<h2 id="2-4）-Inherited"><a href="#2-4）-Inherited" class="headerlink" title="2.4）@Inherited"></a>2.4）@Inherited</h2><p>表示让子类可以获取父类被@Inherited修饰的注解，但是子类实现的接口的注解是无效的。</p>
+<h1 id="3）-简单案例"><a href="#3）-简单案例" class="headerlink" title="3） 简单案例"></a>3） 简单案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">@interface Desc&#123;</span><br><span class="line">    String  name()  default &quot;小夜&quot;;</span><br><span class="line">    String  goal()  default  &quot;Java专家&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Desc(name=&quot;小月&quot;,goal=&quot;Java开发工程师&quot;)</span><br><span class="line">public class Demo &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面我们就定义了一个注解Desc，它有两个成员，一个叫做name，默认值为”小夜”，一个叫做goal，默认值为”Java专家”，然后我们在Demo这个类的上面使用了这个注解。</p>
+<blockquote>
+<p>原文作者 ：梦之都<br>原文链接 ： <a href="https://www.mengzhidu.com/online/item/144/957" target="_blank" rel="noopener">https://www.mengzhidu.com/online/item/144/957</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/29/annotation/03use-selfdefined-annotation/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">3.【读】自定义注解的使用</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/06/29/annotation/01internal-annotation/">
+        <span class="next-text nav-default">1.【读】Java内置注解及使用</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

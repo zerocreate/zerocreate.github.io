@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="AspectJ；xml配置方式。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/06/27/spring4.x/13aop-xml-aspectj/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 13.【读】AOP实现方式：AspectJ（xml配置方式） - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          13.【读】AOP实现方式：AspectJ（xml配置方式）
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-27
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/Spring4-x/">Spring4.x</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/06/27/spring4.x/13aop-xml-aspectj/"
+             data-title="13.【读】AOP实现方式：AspectJ（xml配置方式）">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-简单介绍"><span class="toc-text">1） 简单介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-文件结构"><span class="toc-text">2） 文件结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3）-结果分析"><span class="toc-text">3） 结果分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1）beans-xml文件中的expression-quot-execution-com-spring4-service-LoginService-quot"><span class="toc-text">3.1）beans.xml文件中的expression=&quot;execution(* com.spring4.service.LoginService.*(..))&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2）loginService-login"><span class="toc-text">3.2）loginService.login();</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-简单介绍"><a href="#1）-简单介绍" class="headerlink" title="1） 简单介绍"></a>1） 简单介绍</h1><p>对于AOP的实现，其实使用比较多的不是Spring自带的两种代理实现，而是AspectJ的实现。这种实现方式配置跟前两种方式完全不一样，配置起来简单很多。该实现方式需要借助<code>aspectjweaver.jar</code>。</p>
+<p>使用AspectJ需要在beans.xml文件的<code>&lt;beans&gt;</code>标签中添加aop命令空间和对应的模式文件<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">       http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure></p>
+<p>添加后结果为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">       http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">       http://www.springframework.org/schema/aop</span><br><span class="line">       http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="2）-文件结构"><a href="#2）-文件结构" class="headerlink" title="2） 文件结构"></a>2） 文件结构</h1><ul>
+<li><p>src</p>
+<ul>
+<li><p>com.spring4</p>
+<ul>
+<li><p>aop</p>
+<ul>
+<li>CountService<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class CountService &#123;</span><br><span class="line">    public void before()&#123;</span><br><span class="line">        System.out.println(&quot;登录次数加1&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>inter</p>
+<ul>
+<li>ILoginService<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ILoginService &#123;</span><br><span class="line">    void login();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>service          </p>
+<ul>
+<li>LoginService<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class LoginService implements ILoginService &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void login()&#123;</span><br><span class="line">        System.out.println(&quot;有人登录...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Application</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ApplicationContext  applicationContext = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);</span><br><span class="line">        ILoginService loginService = (ILoginService) applicationContext.getBean(&quot;loginService&quot;);</span><br><span class="line">        loginService.login();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>beans.xml</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">       http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">       http://www.springframework.org/schema/aop</span><br><span class="line">       http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</span><br><span class="line">    &lt;!--  切面 --&gt;</span><br><span class="line">    &lt;bean id=&quot;countService&quot; class=&quot;com.spring4.aop.CountService&quot;&gt;&lt;/bean&gt;</span><br><span class="line">    &lt;!-- 切入的目标对象 --&gt;</span><br><span class="line">    &lt;bean id=&quot;loginService&quot; class=&quot;com.spring4.service.LoginService&quot;&gt;&lt;/bean&gt;</span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">        &lt;!-- 定义LoginService的所有方法都是切点 --&gt;</span><br><span class="line">        &lt;aop:pointcut id=&quot;allService&quot; expression=&quot;execution(* com.spring4.service.LoginService.*(..))&quot;/&gt;</span><br><span class="line">        &lt;!-- 定义切点执行前触发的前置通知为切面CountService的before方法 --&gt;</span><br><span class="line">        &lt;aop:aspect id=&quot;statistics&quot; ref=&quot;countService&quot;&gt;</span><br><span class="line">            &lt;aop:before method=&quot;before&quot; pointcut-ref=&quot;allService&quot; /&gt;</span><br><span class="line">        &lt;/aop:aspect&gt;</span><br><span class="line">    &lt;/aop:config&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="3）-结果分析"><a href="#3）-结果分析" class="headerlink" title="3） 结果分析"></a>3） 结果分析</h1><p>运行输出结果为<br><img src="https://upload-images.jianshu.io/upload_images/3321751-28212f463e089692.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="3-1）beans-xml文件中的expression-quot-execution-com-spring4-service-LoginService-quot"><a href="#3-1）beans-xml文件中的expression-quot-execution-com-spring4-service-LoginService-quot" class="headerlink" title="3.1）beans.xml文件中的expression=&quot;execution(* com.spring4.service.LoginService.*(..))&quot;"></a>3.1）beans.xml文件中的<code>expression=&quot;execution(* com.spring4.service.LoginService.*(..))&quot;</code></h2><ul>
+<li>1 第一个<code>*</code>表示所有的返回值类型；</li>
+<li>2 第二个<code>*</code>表示所有的方法；</li>
+<li>3 小括号的两个点表示所有的参数类型；<br>因此该表达式可以匹配LoginService类的所有方法。</li>
+</ul>
+<h2 id="3-2）loginService-login"><a href="#3-2）loginService-login" class="headerlink" title="3.2）loginService.login();"></a>3.2）<code>loginService.login();</code></h2><p>我们在beans.xml文件中指定LoginService的所有方法都是切点，因此<code>login()</code>是切点。</p>
+<p>切点执行前会执行切面的前置通知输出<code>登录次数加1</code>。<br>执行切点，也就是执行login()方法，输出<code>有人登录...</code>。</p>
+<blockquote>
+<p>原文作者 ：梦之都<br>原文链接 ： <a href="https://www.mengzhidu.com/online/item/129/1026" target="_blank" rel="noopener">https://www.mengzhidu.com/online/item/129/1026</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/28/spring4.x/14aop-annotation-aspectj/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">14.【读】AOP实现方式：AspectJ（注解方式）----终章</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/06/26/spring4.x/12auto-appoint-proxy/">
+        <span class="next-text nav-default">12.【读】AOP实现方式：Spring的自动代理</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>

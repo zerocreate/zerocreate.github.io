@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="用demo快速讲解如何使用jquery过滤元素。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Creating">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/07/12/jquery/04filter-dom-element/"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6351f28516c49added3890b602dca2ff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz",
+      appKey: "1pcB8etncdDJzHXzqrOyP52f"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Creating","subtitle":"编码进行中","description":"学编程如果不是为了玩，那将毫无意义","author":"zerocreate","language":"zh-CN","timezone":null,"url":"http://yoursite.com","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":{"github":"git@github.com:zerocreate/zerocreate.github.io.git,master"}},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2018,"favicon":"/favicon.ico","rss":false,"menu":{"主线":"/categories","翼线":"/tags","历程":"/archives","最近":"/","关于":"/about"},"color":"Default","toc":true,"fancybox":false,"pjax":true,"copyright":{"enable":false,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"4OdyJhLSRY1kV3HUOgdwVao2-gzGzoHsz","app_key":"1pcB8etncdDJzHXzqrOyP52f"},"baidu_analytics":"6351f28516c49added3890b602dca2ff","baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+</script>
+
+    <title> 4.【读】过滤元素 - Creating </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Creating</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            主线
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            翼线
+          
+        </li>
+      </a>
+    
+      <a href="/archives">
+        <li class="mobile-menu-item">
+          
+          
+            历程
+          
+        </li>
+      </a>
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            最近
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Creating</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              主线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              翼线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives">
+            
+            
+              历程
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              最近
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          4.【读】过滤元素
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-07-12
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/jQuery/">jQuery</a>
+            
+          </div>
+        
+        
+        <div class="post-visits"
+             data-url="/2018/07/12/jquery/04filter-dom-element/"
+             data-title="4.【读】过滤元素">
+            阅读次数 0
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1）-最常用的过滤元素demo"><span class="toc-text">1） 最常用的过滤元素demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1）基本用法"><span class="toc-text">1.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2）文件结构"><span class="toc-text">1.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3）运行效果"><span class="toc-text">1.3）运行效果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2）-在一个元素的子元素中进行选择demo"><span class="toc-text">2） 在一个元素的子元素中进行选择demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1）基本用法"><span class="toc-text">2.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2）文件结构"><span class="toc-text">2.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3）运行效果"><span class="toc-text">2.3）运行效果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3）-表单元素的选择demo"><span class="toc-text">3） 表单元素的选择demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1）基本用法"><span class="toc-text">3.1）基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2）文件结构"><span class="toc-text">3.2）文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3）运行效果"><span class="toc-text">3.3）运行效果</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="1）-最常用的过滤元素demo"><a href="#1）-最常用的过滤元素demo" class="headerlink" title="1） 最常用的过滤元素demo"></a>1） 最常用的过滤元素demo</h1><h2 id="1-1）基本用法"><a href="#1-1）基本用法" class="headerlink" title="1.1）基本用法"></a>1.1）基本用法</h2><ul>
+<li>1 可以根据$(“xxx[aaa][bbb][ccc]…”)来获取所有带有aaa并且带有bbb并且带有ccc属性的元素</li>
+<li>2 可以根据$(“xxx[aaa = bbb]”)来获取属性aaa为bbb的xxx元素</li>
+<li>3 可以根据$(“xxx[aaa != bbb]”)来获取属性aaa不为bbb的xxx元素</li>
+<li>4 可以根据$(“xxx[aaa ^= bbb]”)来获取属性aaa以bbb开头的元素</li>
+<li>5 可以根据$(“xxx[aaa $= bbb]”)来获取属性aaa以bbb结尾的元素</li>
+<li>6 可以根据$(“xxx[aaa *= bbb]”)来获取属性aaa包含bbb的元素</li>
+</ul>
+<p>需要说明的是，我们是可以多个限制条件同时使用的，也就是多个中括号同时使用，它表示当这些条件同时满足的时候才获取到该元素。</p>
+<h2 id="1-2）文件结构"><a href="#1-2）文件结构" class="headerlink" title="1.2）文件结构"></a>1.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-1.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div data-name=&quot;xinxing&quot;&gt;</span><br><span class="line">            默默构造，孕育一个杰作</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div data-name=&quot;lujie&quot;&gt;</span><br><span class="line">            享受孤独，享受那份安静</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div data-name=&quot;qianqian&quot;&gt;</span><br><span class="line">            热爱生活，生命充满阳光</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;div[data-name=xinxing]&quot;).css(&quot;color&quot;,&quot;green&quot;);</span><br><span class="line">                $(&quot;div[data-name^=lu]&quot;).css(&quot;color&quot;,&quot;blue&quot;);</span><br><span class="line">                $(&quot;div[data-name$=qian]&quot;).css(&quot;color&quot;,&quot;red&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3）运行效果"><a href="#1-3）运行效果" class="headerlink" title="1.3）运行效果"></a>1.3）运行效果</h2><p>在上面，我们创建了一个”data-name”这个属性，属性名可以任意命名，只要我们通过jQuery能够获取到就可以了。当然我们也可以根据自己的需要来创建多个属性。<br><img src="https://upload-images.jianshu.io/upload_images/3321751-17c02836fe722f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="2）-在一个元素的子元素中进行选择demo"><a href="#2）-在一个元素的子元素中进行选择demo" class="headerlink" title="2） 在一个元素的子元素中进行选择demo"></a>2） 在一个元素的子元素中进行选择demo</h1><h2 id="2-1）基本用法"><a href="#2-1）基本用法" class="headerlink" title="2.1）基本用法"></a>2.1）基本用法</h2><p>因为web中各种展示数据的方式很多都是嵌套关系，有时候我们需要在一个元素的子元素中进行选择，这在web开发中是很常见的。</p>
+<ul>
+<li>1 用$(“xxx:first-child”)来获取第一个子元素</li>
+<li>2 用$(“xxx:last-child”)来获取最后一个子元素</li>
+<li>3 用$(“xxx:only-child”)来获取唯一的一个子元素，前提条件是子元素只有一个，否则获取失败</li>
+<li>4 用$(“xxx:nth-child(aaa)”)来获取第aaa个子元素，注意索引从1开始</li>
+<li>5 用$(“xxx:nth-child(even)”)来获取所有的编号为偶数的子元素，注意索引从1开始</li>
+<li>6 用$(“xxx:nth-child(odd)”)来获取所有编号为基数的子元素，注意索引从1开始</li>
+<li>7 用$(“xxx:nth-child(fn)”)来获取所有符合某个表达式fx的子元素，比如3n+1表示所有除以3余1的子元素，注意索引从1开始</li>
+</ul>
+<h2 id="2-2）文件结构"><a href="#2-2）文件结构" class="headerlink" title="2.2）文件结构"></a>2.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-2.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;p&gt;不是子元素的段落&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;不是子元素的段落&lt;/p&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;p&gt;努力，是一种生活方式&lt;/p&gt;</span><br><span class="line">            &lt;p&gt;努力，是一种生活姿态&lt;/p&gt;</span><br><span class="line">            &lt;p&gt;努力，是一种生活情趣&lt;/p&gt;</span><br><span class="line">            &lt;p&gt;努力，是一种生活体验&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;div p:nth-child(even)&quot;).css(&quot;color&quot;,&quot;red&quot;);</span><br><span class="line">                $(&quot;div p:nth-child(3)&quot;).css(&quot;color&quot;,&quot;blue&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3）运行效果"><a href="#2-3）运行效果" class="headerlink" title="2.3）运行效果"></a>2.3）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-1546d71d636a00d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="3）-表单元素的选择demo"><a href="#3）-表单元素的选择demo" class="headerlink" title="3） 表单元素的选择demo"></a>3） 表单元素的选择demo</h1><h2 id="3-1）基本用法"><a href="#3-1）基本用法" class="headerlink" title="3.1）基本用法"></a>3.1）基本用法</h2><p>表单元素的选择是交互最频繁的。</p>
+<ul>
+<li>1 用$(“:input”)来匹配所有的input、button、select、textarea的元素</li>
+<li>2 用$(“:text”)来匹配所有的单行文本框</li>
+<li>3 用$(“:password”)来匹配所有的密码框</li>
+<li>4 用$(“:radio”)来匹配所有的单选按钮</li>
+<li>5 用$(“:checkbox”)来匹配所有的复选框</li>
+<li>6 用$(“:submit”)来匹配所有的提交按钮</li>
+<li>7 用$(“:selected”)来匹配所有的下拉列表</li>
+<li>8 用$(“:submit”)来匹配所有的提交按钮</li>
+<li>9 用$(“:reset”)来匹配所有的重置按钮</li>
+<li>10 用$(“:button”)来匹配所有的按钮</li>
+<li>11 用$(“:hidden”)来匹配所有的不可见元素</li>
+<li>12 用$(“:enabled”)来匹配所有可用的input元素</li>
+<li>13 用$(“:disbaled”)来匹配所有不可用的input元素</li>
+<li>14 用$(“:image”)来匹配所有的图像内容</li>
+</ul>
+<p>由于这里大多数都是全选的作用，因此一般都是用来做全局的设定，而不是单个的内容设定。</p>
+<h2 id="3-2）文件结构"><a href="#3-2）文件结构" class="headerlink" title="3.2）文件结构"></a>3.2）文件结构</h2><ul>
+<li>/<ul>
+<li>jquery.js</li>
+<li>1-3.html  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;form&gt;</span><br><span class="line">            名称:&lt;input type=&quot;text&quot;  / &gt; &lt;br/&gt;</span><br><span class="line">            密码:&lt;input type=&quot;password&quot;   /&gt; &lt;br/&gt;</span><br><span class="line">            &lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">        &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">            $(document).ready(function()&#123;</span><br><span class="line">                $(&quot;:text&quot;).val(&quot;jquery用户&quot;);</span><br><span class="line">                $(&quot;:password&quot;).val(&quot;star&quot;);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3）运行效果"><a href="#3-3）运行效果" class="headerlink" title="3.3）运行效果"></a>3.3）运行效果</h2><p><img src="https://upload-images.jianshu.io/upload_images/3321751-cb592f2c927bb3ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>原文作者 ：梦之都<br>原文链接 ： <a href="http://www.mengzhidu.com/online/item/60/402" target="_blank" rel="noopener">http://www.mengzhidu.com/online/item/60/402</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/07/12/jquery/05operate-css/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">5.【读】操作样式</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/07/12/jquery/03get-dom-element/">
+        <span class="next-text nav-default">3.【读】获取元素</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zerocreate</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>
